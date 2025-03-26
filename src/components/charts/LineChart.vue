@@ -1,6 +1,6 @@
 <script setup>
-import { defineProps, watch } from "vue";
-import { Line } from "vue-chartjs";
+import { defineProps, watch } from 'vue'
+import { Line } from 'vue-chartjs'
 import {
   Chart as ChartJS,
   Title,
@@ -9,27 +9,26 @@ import {
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
-} from "chart.js";
+  PointElement,
+} from 'chart.js'
 
 // Регистрируем компоненты ChartJS
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
+ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
 // Определяем входные параметры
 const props = defineProps({
   chartData: Object,
-  options: Object
-});
+  options: Object,
+})
 
 // Автообновление графика при изменении данных
 watch(
   () => props.chartData,
   (newData) => {
-    console.log("Chart data updated:", newData);
+    console.log('Chart data updated:', newData)
   },
-  { deep: true }
-);
-
+  { deep: true },
+)
 </script>
 
 <template>
