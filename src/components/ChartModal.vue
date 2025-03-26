@@ -55,18 +55,20 @@ watch(sortType, async () => {
   }
 })
 
-// Обновление графика
+// Обновление графика после загрузки данных
 const updateChart = () => {
-  datacollection.value = {
-    labels: store.historicalRates.map((item) => item.date),
-    datasets: [
-      {
-        label: props.currency?.cc || 'Currency',
-        backgroundColor: '#f87979',
-        borderColor: '#f87979',
-        data: store.historicalRates.map((item) => item.rate),
-      },
-    ],
+  if (!store.historyLoading && store.historicalRates.length > 0) {
+    datacollection.value = {
+      labels: store.historicalRates.map((item) => item.date),
+      datasets: [
+        {
+          label: props.currency?.cc || 'Currency',
+          backgroundColor: '#f87979',
+          borderColor: '#f87979',
+          data: store.historicalRates.map((item) => item.rate),
+        },
+      ],
+    }
   }
 }
 
@@ -94,7 +96,14 @@ const closeModal = () => {
         </select>
 
         <div class="mt-4">
+          <div v-if="store.historyLoading" class="text-center text-gray-500">
+            Загрузка данных...
+          </div>
+          <div v-else-if="store.historicalRates.length === 0" class="text-center text-gray-500">
+            Нет данных
+          </div>
           <Line
+            v-else
             :data="datacollection"
             :options="{ responsive: true, maintainAspectRatio: false }"
           />
