@@ -1,16 +1,16 @@
 <script setup>
-import { ref, computed } from "vue";
-import { useCurrencyStore } from "@/store/currencyStore";
+import { ref, computed } from 'vue'
+import { useCurrencyStore } from '@/store/currencyStore'
 
-const store = useCurrencyStore();
+const store = useCurrencyStore()
 
-const selected = ref(["USD", "EUR"]);
-const amount = ref("");
+const selected = ref(['USD', 'EUR'])
+const amount = ref('')
 
 // Вычисляем конвертированную сумму
 const convertedAmount = computed(() => {
-  return store.convertCurrency(amount.value, selected.value[0], selected.value[1]);
-});
+  return store.convertCurrency(amount.value, selected.value[0], selected.value[1])
+})
 </script>
 
 <template>
@@ -35,7 +35,12 @@ const convertedAmount = computed(() => {
 
         <div class="flex flex-col space-y-2">
           <label class="text-gray-600">I buy</label>
-          <input v-model="convertedAmount" type="text" readonly class="border border-gray-300 rounded px-3 py-2 bg-gray-100" />
+          <input
+            v-model="convertedAmount"
+            type="text"
+            readonly
+            class="border border-gray-300 rounded px-3 py-2 bg-gray-100"
+          />
           <select v-model="selected[1]" class="border border-gray-300 rounded px-3 py-2">
             <option v-for="ccy in store.currencies" :key="ccy.cc" :value="ccy.cc">
               {{ ccy.cc }}

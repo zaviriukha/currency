@@ -1,7 +1,7 @@
 <script setup>
-import { ref, watch } from 'vue';
-import { useCurrencyStore } from '@/store/currencyStore';
-import { Line } from 'vue-chartjs';
+import { ref, watch } from 'vue'
+import { useCurrencyStore } from '@/store/currencyStore'
+import { Line } from 'vue-chartjs'
 import {
   Chart as ChartJS,
   Title,
@@ -11,18 +11,18 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-} from 'chart.js';
+} from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
+ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
 const props = defineProps({
   modelValue: Boolean,
   currency: Object,
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
-const store = useCurrencyStore();
-const sortType = ref('week');
+const emit = defineEmits(['update:modelValue'])
+const store = useCurrencyStore()
+const sortType = ref('week')
 
 const datacollection = ref({
   labels: [],
@@ -34,23 +34,26 @@ const datacollection = ref({
       data: [],
     },
   ],
-});
+})
 
 // Следим за открытием модального окна и загружаем данные
-watch(() => props.modelValue, async (newValue) => {
-  if (newValue && props.currency?.cc) {
-    await store.fetchHistoricalRates(props.currency.cc, sortType.value);
-    updateChart();
-  }
-});
+watch(
+  () => props.modelValue,
+  async (newValue) => {
+    if (newValue && props.currency?.cc) {
+      await store.fetchHistoricalRates(props.currency.cc, sortType.value)
+      updateChart()
+    }
+  },
+)
 
 // Следим за изменением периода и обновляем график
 watch(sortType, async () => {
   if (props.modelValue && props.currency?.cc) {
-    await store.fetchHistoricalRates(props.currency.cc, sortType.value);
-    updateChart();
+    await store.fetchHistoricalRates(props.currency.cc, sortType.value)
+    updateChart()
   }
-});
+})
 
 // Обновление графика
 const updateChart = () => {
@@ -64,16 +67,19 @@ const updateChart = () => {
         data: store.historicalRates.map((item) => item.rate),
       },
     ],
-  };
-};
+  }
+}
 
 const closeModal = () => {
-  emit('update:modelValue', false);
-};
+  emit('update:modelValue', false)
+}
 </script>
 
 <template>
-  <div v-if="modelValue" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div
+    v-if="modelValue"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  >
     <div class="bg-white rounded-lg shadow-lg w-[500px]">
       <div class="px-6 py-4 border-b">
         <h2 class="text-lg font-semibold">{{ currency?.txt }} ({{ currency?.cc }})</h2>
@@ -88,12 +94,18 @@ const closeModal = () => {
         </select>
 
         <div class="mt-4">
-          <Line :data="datacollection" :options="{ responsive: true, maintainAspectRatio: false }" />
+          <Line
+            :data="datacollection"
+            :options="{ responsive: true, maintainAspectRatio: false }"
+          />
         </div>
       </div>
 
       <div class="px-6 py-4 border-t flex justify-end">
-        <button @click="closeModal" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+        <button
+          @click="closeModal"
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
           Close
         </button>
       </div>
