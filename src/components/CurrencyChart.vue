@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useCurrencyStore } from "@/store/currencyStore";
 import ChartModal from "@/components/ChartModal.vue";
 
