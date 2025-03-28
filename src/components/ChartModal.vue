@@ -96,9 +96,7 @@ const closeModal = () => {
         </select>
 
         <div class="mt-4">
-          <div v-if="store.historyLoading" class="text-center text-gray-500">
-            Load Data...
-          </div>
+          <div v-if="store.historyLoading" class="text-center text-gray-500">Load Data...</div>
           <div v-else-if="store.historicalRates.length === 0" class="text-center text-gray-500">
             No Data
           </div>

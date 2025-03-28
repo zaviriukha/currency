@@ -35,7 +35,7 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-5xl bg-white p-6 md:rounded-lg rounded-none  shadow-md">
+    <div class="w-full max-w-5xl bg-white p-6 md:rounded-lg rounded-none shadow-md">
       <div class="text-center mb-5">
         <h1 class="text-2xl font-bold">Currency Rates</h1>
       </div>
@@ -43,7 +43,6 @@ onMounted(() => {
       <div v-if="store.loading">Загрузка...</div>
       <div v-else-if="store.error">{{ store.error }}</div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
         <div class="overflow-auto h-[400px] border rounded-lg shadow-sm">
           <table class="w-full border-collapse">
             <thead>
@@ -61,8 +60,10 @@ onMounted(() => {
                 class="hover:bg-gray-100"
               >
                 <td class="p-3 border">{{ valute.cc }}</td>
-                <td class="p-3 border cursor-pointer uppercase " @click="openChartModal(valute)">
-                  <span class="tooltip hover:text-red-500" title="Open chart">{{ valute.txt }}</span>
+                <td class="p-3 border cursor-pointer uppercase" @click="openChartModal(valute)">
+                  <span class="tooltip hover:text-red-500" title="Open chart">{{
+                    valute.txt
+                  }}</span>
                 </td>
                 <td class="p-3 border">{{ valute.rate }}</td>
                 <td class="p-3 border text-center">
@@ -73,13 +74,7 @@ onMounted(() => {
                   >
                     ❤️
                   </button>
-                  <button
-                    v-else
-                    @click="deleteFavorite(valute)"
-                    class="cursor-pointer"
-                  >
-                    ❌
-                  </button>
+                  <button v-else @click="deleteFavorite(valute)" class="cursor-pointer">❌</button>
                 </td>
               </tr>
             </tbody>
@@ -97,12 +92,7 @@ onMounted(() => {
               class="flex justify-between items-center bg-white p-3 rounded-lg shadow"
             >
               <div>{{ favorite.cc }} - {{ favorite.txt }}</div>
-              <button
-                @click="deleteFavorite(favorite)"
-                class="cursor-pointer"
-              >
-                🗑️
-              </button>
+              <button @click="deleteFavorite(favorite)" class="cursor-pointer">🗑️</button>
             </li>
           </ul>
           <p v-else class="text-center text-gray-500">No favorites yet.</p>

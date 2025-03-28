@@ -3,5 +3,5 @@ import CurrencyConverter from '@/components/CurrencyConverter.vue'
 </script>
 
 <template>
-    <CurrencyConverter />
+  <CurrencyConverter />
 </template>
