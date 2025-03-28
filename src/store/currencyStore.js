@@ -21,8 +21,6 @@ export const useCurrencyStore = defineStore('currency', () => {
       data.push({ cc: 'UAH', rate: 1 })
 
       currencies.value = data
-    } catch (err) {
-      error.value = 'Ошибка при загрузке валют.'
     } finally {
       loading.value = false
     }
@@ -56,9 +54,9 @@ export const useCurrencyStore = defineStore('currency', () => {
     }
   }
 
-// Конвертер валют
+  // Конвертер валют
   const convertCurrency = (amount, from, to) => {
-    if (!amount && amount !== 0) return ''  // Просто возвращаем пустую строку, если сумма не введена
+    if (!amount && amount !== 0) return '' // Просто возвращаем пустую строку, если сумма не введена
 
     if (isNaN(amount) || amount <= 0) return 'Некорректная сумма' // Теперь проверка на некорректную сумму только если значение введено
 
@@ -71,5 +69,13 @@ export const useCurrencyStore = defineStore('currency', () => {
     return result.toFixed(2)
   }
 
-  return { currencies, loading, error, fetchRates, historicalRates, fetchHistoricalRates, convertCurrency }
+  return {
+    currencies,
+    loading,
+    error,
+    fetchRates,
+    historicalRates,
+    fetchHistoricalRates,
+    convertCurrency,
+  }
 })

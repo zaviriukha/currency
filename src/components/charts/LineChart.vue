@@ -12,16 +12,15 @@ import {
   PointElement,
 } from 'chart.js'
 
-// Регистрируем компоненты ChartJS
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
-// Определяем входные параметры
+// define input props
 const props = defineProps({
   chartData: Object,
   options: Object,
 })
 
-// Автообновление графика при изменении данных
+// graphic update if data changed
 watch(
   () => props.chartData,
   (newData) => {

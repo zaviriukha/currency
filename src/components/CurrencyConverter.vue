@@ -12,14 +12,14 @@ const updateConversion = () => {
   convertedAmount.value = store.convertCurrency(amount.value, selected.value[0], selected.value[1])
 }
 
-// Загружаем курсы валют при первом открытии компонента
+// load data from api in first load
 onMounted(async () => {
   if (store.currencies.length === 0) {
     await store.fetchRates()
   }
 })
 
-// Следим за вводом данных и обновляем сумму
+// add currency number in input and update summery
 watch([amount, selected], updateConversion, { immediate: true })
 </script>
 
@@ -30,7 +30,7 @@ watch([amount, selected], updateConversion, { immediate: true })
         <h1 class="text-2xl font-bold">Currency Converter</h1>
       </div>
 
-      <div v-if="store.loading">Загрузка...</div>
+      <div v-if="store.loading">Load...</div>
       <div v-else-if="store.error">{{ store.error }}</div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col space-y-2">

@@ -36,7 +36,7 @@ const datacollection = ref({
   ],
 })
 
-// Следим за открытием модального окна и загружаем данные
+// check if modal open and load data
 watch(
   () => props.modelValue,
   async (newValue) => {
@@ -47,7 +47,7 @@ watch(
   },
 )
 
-// Следим за изменением периода и обновляем график
+// check if time period is changes and update graphic
 watch(sortType, async () => {
   if (props.modelValue && props.currency?.cc) {
     await store.fetchHistoricalRates(props.currency.cc, sortType.value)
@@ -55,7 +55,7 @@ watch(sortType, async () => {
   }
 })
 
-// Обновление графика после загрузки данных
+// update graphic, after data update
 const updateChart = () => {
   if (!store.historyLoading && store.historicalRates.length > 0) {
     datacollection.value = {
@@ -97,10 +97,10 @@ const closeModal = () => {
 
         <div class="mt-4">
           <div v-if="store.historyLoading" class="text-center text-gray-500">
-            Загрузка данных...
+            Load Data...
           </div>
           <div v-else-if="store.historicalRates.length === 0" class="text-center text-gray-500">
-            Нет данных
+            No Data
           </div>
           <Line
             v-else
