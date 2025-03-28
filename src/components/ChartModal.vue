@@ -80,9 +80,9 @@ const closeModal = () => {
 <template>
   <div
     v-if="modelValue"
-    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+    class="fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.75)]"
   >
-    <div class="bg-white rounded-lg shadow-lg w-[500px]">
+    <div class="bg-white md:rounded-lg rounded-none shadow-lg w-[700px]">
       <div class="px-6 py-4 border-b">
         <h2 class="text-lg font-semibold">{{ currency?.txt }} ({{ currency?.cc }})</h2>
       </div>

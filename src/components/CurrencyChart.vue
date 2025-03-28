@@ -35,7 +35,7 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-5xl bg-white p-6 rounded-lg shadow-md">
+    <div class="w-full max-w-5xl bg-white p-6 md:rounded-lg rounded-none  shadow-md">
       <div class="text-center mb-5">
         <h1 class="text-2xl font-bold">Currency Rates</h1>
       </div>
@@ -61,20 +61,22 @@ onMounted(() => {
                 class="hover:bg-gray-100"
               >
                 <td class="p-3 border">{{ valute.cc }}</td>
-                <td class="p-3 border cursor-pointer text-blue-600" @click="openChartModal(valute)">
-                  <span class="tooltip" title="Open chart">{{ valute.txt }}</span>
+                <td class="p-3 border cursor-pointer uppercase " @click="openChartModal(valute)">
+                  <span class="tooltip hover:text-red-500" title="Open chart">{{ valute.txt }}</span>
                 </td>
                 <td class="p-3 border">{{ valute.rate }}</td>
                 <td class="p-3 border text-center">
                   <button
                     v-if="!favorites.some((fav) => fav.cc === valute.cc)"
                     @click="addFavorite(valute)"
+                    class="cursor-pointer"
                   >
                     ❤️
                   </button>
                   <button
                     v-else
                     @click="deleteFavorite(valute)"
+                    class="cursor-pointer"
                   >
                     ❌
                   </button>
@@ -97,6 +99,7 @@ onMounted(() => {
               <div>{{ favorite.cc }} - {{ favorite.txt }}</div>
               <button
                 @click="deleteFavorite(favorite)"
+                class="cursor-pointer"
               >
                 🗑️
               </button>
