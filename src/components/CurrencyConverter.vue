@@ -1,16 +1,26 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useCurrencyStore } from '@/store/currencyStore'
 
 const store = useCurrencyStore()
 
 const selected = ref(['USD', 'EUR'])
 const amount = ref('')
+const convertedAmount = ref('')
 
-// Вычисляем конвертированную сумму
-const convertedAmount = computed(() => {
-  return store.convertCurrency(amount.value, selected.value[0], selected.value[1])
+const updateConversion = () => {
+  convertedAmount.value = store.convertCurrency(amount.value, selected.value[0], selected.value[1])
+}
+
+// Загружаем курсы валют при первом открытии компонента
+onMounted(async () => {
+  if (store.currencies.length === 0) {
+    await store.fetchRates()
+  }
 })
+
+// Следим за вводом данных и обновляем сумму
+watch([amount, selected], updateConversion, { immediate: true })
 </script>
 
 <template>
