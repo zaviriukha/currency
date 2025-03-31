@@ -1,6 +1,6 @@
 # Description
 
-Project based on Vue 3 and API of the National Bank of Ukraine (NBU). Updated version of the vue-currency with new Vue3 functionality and Tailwind
+Project based on Vue 3 and API of the National Bank of Ukraine (NBU). Updated version of the vue-currency with Vue3, Pinia and Tailwind
 
 ## Project Setup
 
